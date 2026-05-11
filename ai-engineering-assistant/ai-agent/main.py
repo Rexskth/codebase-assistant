@@ -18,9 +18,10 @@ from .state.state import AgentState
 load_dotenv()
 
 # Check for required API key
-if not os.getenv("OPENAI_API_KEY"):
-    print("Error: OPENAI_API_KEY environment variable is required")
-    print("Please create a .env file with your OpenAI API key")
+if not os.getenv("OPENROUTER_API_KEY"):
+    print("Error: OPENROUTER_API_KEY environment variable is required")
+    print("Please create a .env file with your OpenRouter API key")
+    print("Get your key from: https://openrouter.ai")
     sys.exit(1)
 
 

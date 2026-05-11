@@ -48,7 +48,7 @@ This project builds a modular AI infrastructure platform for software engineerin
 ### Prerequisites
 - Python 3.8+
 - Git
-- OpenAI API Key
+- OpenRouter API Key (get one at https://openrouter.ai)
 
 ### Installation
 
@@ -61,7 +61,13 @@ cd ai-engineering-assistant
 2. Set up environment variables:
 ```bash
 cp .env.example .env
-# Edit .env and add your OpenAI API key
+# Edit .env and add your OpenRouter API key
+```
+
+Example `.env`:
+```env
+OPENROUTER_API_KEY=your_openrouter_key_here
+MODEL_NAME=openai/gpt-5.5
 ```
 
 3. Install dependencies for MCP server:

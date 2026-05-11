@@ -5,6 +5,7 @@ Each node represents a step in the agent's workflow.
 """
 
 import json
+import os
 import requests
 from typing import Dict, Any
 from langchain_openai import ChatOpenAI
@@ -13,8 +14,14 @@ from langchain_core.prompts import PromptTemplate
 from ..state.state import AgentState
 from ..prompts.prompts import TOOL_SELECTION_PROMPT, RESPONSE_SYNTHESIS_PROMPT
 
-# Initialize LLM
-llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+# Initialize LLM with OpenRouter
+model_name = os.getenv("MODEL_NAME", "openai/gpt-5.5")
+llm = ChatOpenAI(
+    model=model_name,
+    api_key=os.getenv("OPENROUTER_API_KEY"),
+    base_url="https://openrouter.ai/api/v1",
+    temperature=0
+)
 
 # MCP Server URL - in production, this would be configurable
 MCP_SERVER_URL = "http://localhost:8000"
