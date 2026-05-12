@@ -18,9 +18,10 @@ from ..prompts.prompts import TOOL_SELECTION_PROMPT, RESPONSE_SYNTHESIS_PROMPT
 model_name = os.getenv("MODEL_NAME", "openai/gpt-5.5")
 llm = ChatOpenAI(
     model=model_name,
-    api_key=os.getenv("OPENROUTER_API_KEY"),
+    openai_api_key=os.getenv("OPENROUTER_API_KEY"),
     base_url="https://openrouter.ai/api/v1",
-    temperature=0
+    temperature=0,
+    max_tokens=1024
 )
 
 # MCP Server URL - in production, this would be configurable

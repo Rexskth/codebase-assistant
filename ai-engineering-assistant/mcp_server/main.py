@@ -135,10 +135,11 @@ async def list_tools():
 
 
 if __name__ == "__main__":
-    # Run the server directly
+    # Run the server directly without automatic reload.
+    # Using the app instance directly avoids module path issues in reload mode.
     uvicorn.run(
-        "main:app",
+        app,
         host=config.HOST,
         port=config.PORT,
-        reload=True  # Enable auto-reload for development
+        reload=False
     )

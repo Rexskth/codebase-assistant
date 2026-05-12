@@ -11,15 +11,30 @@ import os
 import sys
 from dotenv import load_dotenv
 
-from .graph.graph import agent_graph
-from .state.state import AgentState
-
 # Load environment variables
 load_dotenv()
 
+# Map OpenRouter API key to OpenAI API key for LangChain compatibility
+if os.getenv("OPENROUTER_API_KEY") and not os.getenv("OPENAI_API_KEY"):
+    os.environ["OPENAI_API_KEY"] = os.getenv("OPENROUTER_API_KEY")
+
 # Check for required API key
-if not os.getenv("OPENROUTER_API_KEY"):
-    print("Error: OPENROUTER_API_KEY environment variable is required")
+if not os.getenv("OPENAI_API_KEY"):
+    print("Error: OPENROUTER_API_KEY or OPENAI_API_KEY environment variable is required")
+    print("Please create a .env file with your OpenRouter API key")
+    print("Get your key from: https://openrouter.ai")
+    sys.exit(1)
+
+from .graph.graph import agent_graph
+from .state.state import AgentState
+
+# Map OpenRouter API key to OpenAI API key for LangChain compatibility
+if os.getenv("OPENROUTER_API_KEY") and not os.getenv("OPENAI_API_KEY"):
+    os.environ["OPENAI_API_KEY"] = os.getenv("OPENROUTER_API_KEY")
+
+# Check for required API key
+if not os.getenv("OPENAI_API_KEY"):
+    print("Error: OPENROUTER_API_KEY or OPENAI_API_KEY environment variable is required")
     print("Please create a .env file with your OpenRouter API key")
     print("Get your key from: https://openrouter.ai")
     sys.exit(1)
@@ -38,9 +53,9 @@ def run_agent_query(user_query: str) -> str:
     # Create initial state
     initial_state = AgentState(user_query=user_query)
 
-    # Run the graph
+    # Run the graph using a plain dict input
     try:
-        result = agent_graph.invoke(initial_state)
+        result = agent_graph.invoke(initial_state.dict())
 
         # Return the final response
         return result.get("final_response", "No response generated")

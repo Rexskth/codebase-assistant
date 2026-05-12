@@ -72,13 +72,13 @@ MODEL_NAME=openai/gpt-5.5
 
 3. Install dependencies for MCP server:
 ```bash
-cd mcp-server
+cd mcp_server
 pip install -r requirements.txt
 ```
 
 4. Install dependencies for AI agent:
 ```bash
-cd ../ai-agent
+cd ../ai_agent
 pip install -r requirements.txt
 ```
 
@@ -86,15 +86,15 @@ pip install -r requirements.txt
 
 1. **Start the MCP server** (in terminal 1):
 ```bash
-cd mcp-server
-python main.py
+cd mcp_server
+python -m mcp_server.main
 ```
 The server will start on http://localhost:8000
 
 2. **Start the AI agent** (in terminal 2):
 ```bash
-cd ai-agent
-python main.py
+cd ai_agent
+python -m ai_agent.main
 ```
 
 ### Example Usage
@@ -127,7 +127,7 @@ Assistant: Here are the recent commits from today:
 
 ### Architecture Overview
 
-#### MCP Server (`mcp-server/`)
+#### MCP Server (`mcp_server/`)
 - **Framework**: FastAPI with Pydantic
 - **Purpose**: Tool execution layer
 - **Tools**:
@@ -135,7 +135,7 @@ Assistant: Here are the recent commits from today:
   - `get_project_files`: File system exploration
   - `read_file`: File content reading
 
-#### AI Agent (`ai-agent/`)
+#### AI Agent (`ai_agent/`)
 - **Framework**: LangGraph + LangChain
 - **Purpose**: Query understanding and orchestration
 - **Workflow**: Query → Tool Selection → Tool Execution → Response Synthesis
