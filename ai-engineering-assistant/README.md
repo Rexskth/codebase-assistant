@@ -165,4 +165,4 @@ This project follows incremental development. Please focus on the current versio
 
 ## License
 
-[Add license information]
+[Add license information].
